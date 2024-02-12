@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Tabela de Enquetes
+model Poll {
+  id        String   @id @default(uuid()) // Primary key e Unique Universal ID
+  title     String // Titulo para Poll
+  cratedAt  DateTime @default(now()) // Data de criação na hora da inserção
+  updatedAt DateTime @default(now()) // Data de update  na hora da inserção
+
+  // Indica a relação da minha tabela Poll com PollOption. oprtion basicamente indica
+  //quais opções pertecem a minha Poll.
+  options PollOption[]
+  vote    Vote[]
+}
+
+//Tabela de opções da enquete
+
+//Relacionamento de N Options para 1 Poll
+model PollOption {
+  id     String @id @default(uuid()) // Primary key e Unique Universal ID
+  title  String // Titulo para Poll 
+  //Referencia a qual poll essa opção pertence
+  pollId String //Chave estrangeira
+
+  //Indica a relação com a tabela Poll. Basicamente poll refere-se a qual enquete
+  //a qual minha opção pertence
+  poll Poll   @relation(fields: [pollId], references: [id])
+  vote Vote[]
+}
+
+model Vote {
+  id           Int      @id @default(autoincrement())
+  sessionId    String
+  pollId       String
+  pollOptionId String
+  cratedAt     DateTime @default(now()) // Data de criação na hora da inserção
+
+  pollOption PollOption @relation(fields: [pollOptionId], references: [id])
+  poll       Poll       @relation(fields: [pollId], references: [id])
+
+  //Certificando que o usuário só poderá votar uma vez em uma certa enquete
+  @@unique([sessionId, pollId])
+}

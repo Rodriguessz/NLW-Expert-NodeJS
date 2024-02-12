@@ -1,0 +1,48 @@
+# Versão da sintaxe a ser utilizada
+version: '3.7'
+
+#Serviços externos que irão conter minha pp
+services:
+
+#Postgres Services
+  postgres:
+    #Images - Comandos pré prontos para instalar o postgres em uma linux zerado
+    image: bitnami/postgresql:latest
+
+    #Redireciona as portas da minha aplicação, permitindo a comunição com o postgres
+    ports:
+      - '5432:5432'
+
+      #Variavéis de ambiente
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=polls
+      
+      #Sistema de storage, mesmo que o meu container docker pare a execução, os dados
+      #devem persisistir e estarão nesse caminho.
+    volumes:
+      - polls_pg_data:/bitnami/postgresql
+
+
+#Redis Services
+  redis:
+
+  #Comandos pré prontos para que seja instalado o redis em um linux zerado
+    image: bitnami/redis:latest
+  
+  #Variaveis de ambiente
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+
+  #Redirecionamento de portas
+    ports:
+      - '6379:6379'
+  
+  #Dados irão ser armazenados e persistidos
+    volumes:
+      - 'polls_redis_data:/bitnami/redis/data'
+
+volumes:
+  polls_pg_data:
+  polls_redis_data:
