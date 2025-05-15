@@ -1,4 +1,4 @@
-# PollVO
+# LivePollster
 
 ![Badge de status do projeto](https://img.shields.io/badge/status-completo-brightgreen)
 
