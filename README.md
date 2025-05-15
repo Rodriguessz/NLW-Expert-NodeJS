@@ -1,9 +1,8 @@
-# NLW Expert (Node.js)
+# PollVO
 
 ![Badge de status do projeto](https://img.shields.io/badge/status-completo-brightgreen)
 
-
-A real-time voting system where users can create a poll and other users can cast their votes. The system generates a ranking among the options and updates the votes in real-time.
+Um sistema de votação em tempo real onde os usuários podem criar uma enquete e outros usuários podem votar. O sistema gera um ranking entre as opções e atualiza os votos em tempo real. Projeto desenvolvido durante a NLW-Expert da empresa Rockeatseat.
 
 ## Requisites
 
