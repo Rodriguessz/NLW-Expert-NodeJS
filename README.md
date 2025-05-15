@@ -1,5 +1,8 @@
 # NLW Expert (Node.js)
 
+![Badge de status do projeto](https://img.shields.io/badge/status-completo-brightgreen)
+
+
 A real-time voting system where users can create a poll and other users can cast their votes. The system generates a ranking among the options and updates the votes in real-time.
 
 ## Requisites
